@@ -25,6 +25,11 @@ def put_data_list_into_dataframe(data_list):
     return df
 
 
+def find_proportion_new_cases(df):
+
+    pass
+
+
 def plot_dataframe_group_country(df):
     # Define colours of grouped points
     colours = {'Spain':'red', 'Italy':'blue'}
