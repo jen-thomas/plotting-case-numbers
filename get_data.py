@@ -19,11 +19,12 @@ def get_data_for_countries(countries):
 def countries_population():
     # From Wikipedia
     return {'Spain': 46_733_038,
-            'UK': 67_454_757,
+            'United Kingdom': 67_454_757,
             'Switzerland': 8_570_146,
             'Italy': 60_317_546,
             'US': 328_239_523,
-            'Germany': 83_149_300
+            'Germany': 83_149_300,
+            'China': 1_427_647_786
             }
 
 
