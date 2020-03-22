@@ -43,7 +43,7 @@ def plot_dataframe_group_country(df):
     colours = {'Spain':'red', 'Italy':'blue'}
 
     # Create axes for plot
-    fig, ax = plt.subplots(figsize=(8,6))
+    fig, ax = plt.subplots(figsize=(20,6))
 
     # Group the data by country and plot the number of cases per day
     grouped = df.groupby('Country')
