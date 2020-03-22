@@ -48,7 +48,7 @@ def plot_dataframe_group_country(df):
     # Group the data by country and plot the number of cases per day
     df['delta_Number of cases'] = df.groupby('Country')['Number of cases'].diff()
 
-    df['delta_Number of cases_per_milion'] = df.groupby('Country')['']
+    # df['delta_Number of cases_per_milion'] = df.groupby('Country')['']
 
     df['ratio_Number of cases'] = df['delta_Number of cases'].div(df.groupby('Country')['delta_Number of cases'].shift(1))
     grouped = df.groupby('Country')
