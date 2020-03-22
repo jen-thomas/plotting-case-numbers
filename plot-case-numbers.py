@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 import get_data
 
 def create_test_dataframe():
-    data = [['2020-03-01', 'Spain', 150, 0], ['2020-03-02', 'Spain', 252, 2], ['2020-03-03', 'Spain', 400, 4],
-            ['2020-03-01', 'Italy', 200, 0], ['2020-03-02', 'Italy', 250, 5], ['2020-03-03', 'Italy', 470, 10],
-            ]
+    data = [['Spain', '2020-03-01', 150, 0], ['Spain', '2020-03-02', 252, 2], ['Spain', '2020-03-03', 400, 4], \
+           ['Italy', '2020-03-01', 200, 0], ['Italy', '2020-03-02', 250, 5], ['Italy', '2020-03-03', 470, 10],
+    ]
 
     # Create the pandas DataFrame
     df = pd.DataFrame(data, columns=['Date', 'Country', 'Number of cases', 'Number of deaths'])
@@ -17,8 +17,12 @@ def create_test_dataframe():
     return df
 
 
-def get_case_data():
-    spain_confirmed = get_data.get_data('data/time_series_19-covid-Confirmed.csv', 'Spain')
+def put_data_list_into_dataframe(data_list):
+
+    df = pd.DataFrame(data_list, columns=['Country', 'Date', 'Number of cases', 'Number of deaths'])
+    df['Date'] = pd.to_datetime(df['Date'])
+
+    return df
 
 
 def plot_dataframe_group_country(df):
@@ -36,5 +40,12 @@ def plot_dataframe_group_country(df):
     ax.set_xlabel('Date')
     ax.set_ylabel('Number of cases')
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
+    data_list = [['Spain', '2020-03-01', 150, 0], ['Spain', '2020-03-02', 252, 2], ['Spain', '2020-03-03', 400, 4], \
+            ['Italy', '2020-03-01', 200, 0], ['Italy', '2020-03-02', 250, 5], ['Italy', '2020-03-03', 470, 10],
+            ]
+    df = put_data_list_into_dataframe(data_list)
+
+
+    plot_dataframe_group_country(df)
