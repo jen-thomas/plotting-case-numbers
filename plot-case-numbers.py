@@ -8,12 +8,11 @@ def create_test_dataframe():
     ]
 
     # Create the pandas DataFrame
-    df = pd.DataFrame(data, columns=['Date', 'Country', 'Number of cases', 'Number of deaths'])
+    df = pd.DataFrame(data, columns=['Country', 'Date', 'Number of cases', 'Number of deaths'])
     df['Date'] = pd.to_datetime(df['Date'])
     df['Number of cases'] = pd.to_numeric(df['Number of cases'])
     df['Number of deaths'] = pd.to_numeric(df['Number of deaths'])
 
-    # print dataframe.
     print(df)
 
     return df
@@ -30,8 +29,13 @@ def put_data_list_into_dataframe(data_list):
 
 
 def find_proportion_new_cases(df):
+    df['New daily cases'] = df.groupby('Country')['Number of cases'].diff()
+    df['New daily deaths'] = df.groupby('Country')['Number of deaths'].diff()
 
-    pass
+    df['rate new cases'] = df.groupby('Country')['New daily cases'].pct_change()+1
+    df['rate new deaths'] = df.groupby('Country')['New daily deaths'].pct_change()+1
+
+    return df
 
 
 def plot_dataframe_group_country(df):
@@ -39,7 +43,7 @@ def plot_dataframe_group_country(df):
     colours = {'Spain':'red', 'Italy':'blue'}
 
     # Create axes for plot
-    fig, ax = plt.subplots(figsize=(8,6))
+    fig, ax = plt.subplots(figsize=(20,6))
 
     # Group the data by country and plot the number of cases per day
     df['delta_Number of cases'] = df.groupby('Country')['Number of cases'].diff()
@@ -62,9 +66,9 @@ def plot_dataframe_group_country(df):
 if __name__ == '__main__':
 
     data_list = get_data.get_data_for_countries(['Spain', 'Italy'])
-    #data_list = [['Spain', '2020-03-01', 150, 0], ['Spain', '2020-03-02', 252, 2], ['Spain', '2020-03-03', 400, 4], \
-    #        ['Italy', '2020-03-01', 200, 0], ['Italy', '2020-03-02', 250, 5], ['Italy', '2020-03-03', 470, 10],
-    #        ]
+
     df = put_data_list_into_dataframe(data_list)
+
+    find_proportion_new_cases(df)
 
     plot_dataframe_group_country(df)
