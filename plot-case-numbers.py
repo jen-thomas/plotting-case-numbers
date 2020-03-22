@@ -37,8 +37,8 @@ def find_proportion_new_cases(df):
     df['New daily cases'] = df.groupby('Country')['Number of cases'].diff()
     df['New daily deaths'] = df.groupby('Country')['Number of deaths'].diff()
 
-    df['rate new cases'] = df.groupby('Country')['New daily cases'].pct_change() + 1
-    df['rate new deaths'] = df.groupby('Country')['New daily deaths'].pct_change() + 1
+    df['Ratio new cases'] = df.groupby('Country')['New daily cases'].pct_change() + 1
+    df['Ratio new deaths'] = df.groupby('Country')['New daily deaths'].pct_change() + 1
 
     return df
 
@@ -64,9 +64,14 @@ def plot_dataframe_group_country(df):
         # group.plot(ax=ax, kind='line', x='Date', y='delta_Number of cases', label=key, color=colours[key])
         group.plot(ax=ax, kind='line', x='Date', y='delta_Number of cases_per_million', label=key, color=colours[key])
 
+    ax2 = ax.twinx()
+
+    for key, group in grouped:
+        group.plot(ax=ax2, kind='line', linestyle='--', x='Date', y='Ratio new cases', label=key, color=colours[key])
+
     ax.set_xlabel('Date')
     ax.set_ylabel('Number of cases')
-
+    ax2.set_ylabel('Ratio of new daily cases')
     plt.show()
 
 
