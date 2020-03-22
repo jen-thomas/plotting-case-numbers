@@ -2,6 +2,14 @@
 import csv
 
 
+def get_data_for_country(country):
+    confirmed = get_data('data/time_series_19-covid-Confirmed.csv', country)
+    deaths = get_data('data/time_series_19-covid-Deaths.csv', country)
+
+    confirmed_and_deaths = merge(confirmed, deaths)
+
+    return confirmed_and_deaths
+
 def countries_population():
     # From Wikipedia
     return {'Spain': 46_733_038,
