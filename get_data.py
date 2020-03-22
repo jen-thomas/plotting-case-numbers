@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
+
 import csv
+import sys
 
 
-def get_data_for_country(country):
-    confirmed = get_data('data/time_series_19-covid-Confirmed.csv', country)
-    deaths = get_data('data/time_series_19-covid-Deaths.csv', country)
+def get_data_for_countries(countries):
+    countries_confirmed = {}
+    countries_deaths = {}
+    for country in countries:
+        countries_confirmed[country] = get_data('data/time_series_19-covid-Confirmed.csv', country)
+        countries_deaths[country] = get_data('data/time_series_19-covid-Deaths.csv', country)
 
-    confirmed_and_deaths = merge(confirmed, deaths)
+    confirmed_and_deaths = merge(countries_confirmed, countries_deaths)
 
     return confirmed_and_deaths
+
 
 def countries_population():
     # From Wikipedia
@@ -49,8 +55,9 @@ def process_country(country_information):
 
 def merge(confirmed, deaths):
     output = []
-    for date in confirmed:
-        output.append([date, confirmed[date], deaths[date]])
+    for country, country_confirmed in confirmed.items():
+        for date in country_confirmed:
+            output.append([country, date, confirmed[country][date], deaths[country][date]])
 
     return output
 
@@ -79,10 +86,5 @@ def print_confirmed_deaths_rate(confirmed_and_deaths):
 
 
 if __name__ == '__main__':
-    confirmed = get_data('data/time_series_19-covid-Confirmed.csv', 'Spain')
-    deaths = get_data('data/time_series_19-covid-Deaths.csv', 'Spain')
-
-    confirmed_and_deaths = merge(confirmed, deaths)
-    print(confirmed_and_deaths)
-
-    print_confirmed_deaths_rate(confirmed_and_deaths)
+    print(get_data_for_countries(['Spain', 'Italy']))
+    sys.exit(1)
