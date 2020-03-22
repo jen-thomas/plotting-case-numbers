@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib import colors
+import get_data
 
 def create_test_dataframe():
     data = [['2020-03-01', 'Spain', 150, 0], ['2020-03-02', 'Spain', 252, 2], ['2020-03-03', 'Spain', 400, 4],
@@ -17,6 +17,10 @@ def create_test_dataframe():
     return df
 
 
+def get_case_data():
+    spain_confirmed = get_data.get_data('data/time_series_19-covid-Confirmed.csv', 'Spain')
+
+
 def plot_dataframe_group_country(df):
     # Define colours of grouped points
     colours = {'Spain':'red', 'Italy':'blue'}
@@ -31,4 +35,6 @@ def plot_dataframe_group_country(df):
     plt.show()
     ax.set_xlabel('Date')
     ax.set_ylabel('Number of cases')
+
+if __name__ == '__main__':
 
