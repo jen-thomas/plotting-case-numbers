@@ -55,7 +55,7 @@ def cases_per_million_population(df):
 
 
 def plot_new_cases_group_country(df):
-    colours = {'Spain': 'red', 'Italy': 'green'}
+    colours = {'Spain': 'red', 'Italy': 'green', 'United Kingdom': 'blue'}
 
     # Create axes for plot
     fig = plt.figure()
@@ -88,7 +88,7 @@ def plot_new_cases_group_country(df):
 
 
 if __name__ == '__main__':
-    data_list = get_data.get_data_for_countries(['Spain', 'Italy'])
+    data_list = get_data.get_data_for_countries(['Spain', 'Italy', 'United Kingdom'])
 
     df = put_data_list_into_dataframe(data_list)
 

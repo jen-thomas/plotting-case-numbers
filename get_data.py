@@ -34,7 +34,9 @@ def get_data(file_path, country):
         csv_reader = csv.DictReader(csvfile)
 
         for country_information in csv_reader:
-            if country_information['Country/Region'] == country:
+            if (country_information['Country/Region'] == country and country_information['Province/State'] == '') or \
+                    (country_information['Country/Region'] == country and country_information[
+                        'Province/State'] == country):
                 output = process_country(country_information)
 
     return output
