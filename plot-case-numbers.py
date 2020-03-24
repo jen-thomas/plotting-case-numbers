@@ -49,7 +49,8 @@ def cases_per_million_population(df):
     df['delta_Number of cases_per_million'] = df.apply(calculate_number_of_cases_per_million,
                                                        axis=1)
 
-    df['ratio_Number of cases'] = df['delta_Number of cases'].div(df.groupby('Country')['delta_Number of cases'].shift(1))
+    df['ratio_Number of cases'] = df['delta_Number of cases'].div(
+        df.groupby('Country')['delta_Number of cases'].shift(1))
 
     return df
 
@@ -71,7 +72,8 @@ def plot_new_cases_group_country(df):
         group.plot(ax=ax1, kind='line', x='Date', y='Number of cases', label=key, color=colours[key])
         group.plot(ax=ax11, kind='line', linestyle='--', x='Date', y='Ratio new cases', label=key, color=colours[key])
         group.plot(ax=ax2, kind='line', x='Date', y='delta_Number of cases', label=key, color=colours[key])
-        group.plot(ax=ax22, kind='line', linestyle='--', x='Date', y='delta_Number of cases_per_million', label=key, color=colours[key])
+        group.plot(ax=ax22, kind='line', linestyle='--', x='Date', y='delta_Number of cases_per_million', label=key,
+                   color=colours[key])
 
     # Plot a horizontal line where the ratio of new daily cases is 1
     ax11.axhline(y=1, color='lightgrey', linestyle='-')
@@ -88,7 +90,7 @@ def plot_new_cases_group_country(df):
 
 
 if __name__ == '__main__':
-    data_list = get_data.get_data_for_countries(['Spain', 'Italy', 'United Kingdom'])
+    data_list = get_data.get_data_for_countries(['Spain', 'Italy'])
 
     df = put_data_list_into_dataframe(data_list)
 
