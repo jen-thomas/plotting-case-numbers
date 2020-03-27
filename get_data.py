@@ -89,5 +89,5 @@ def print_confirmed_deaths_rate(confirmed_and_deaths):
 
 
 if __name__ == '__main__':
-    print(get_data_for_countries(['Spain', 'Italy']))
+    print(get_data_for_countries(['Spain', 'Italy', 'China', 'United Kingdom']))
     sys.exit(1)
