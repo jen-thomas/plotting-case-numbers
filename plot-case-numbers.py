@@ -56,10 +56,11 @@ def cases_per_million_population(df):
 
 
 def plot_new_cases_group_country(df):
-    colours = {'Spain': 'red', 'Italy': 'green', 'United Kingdom': 'blue'}
+    colours = {'Spain': 'red', 'Italy': 'green', 'United Kingdom': 'blue', 'China': 'yellow', 'Switzerland': 'magenta'}
 
     # Create axes for plot
     fig = plt.figure()
+
     ax1 = fig.add_subplot(211)
     ax2 = fig.add_subplot(212)
 
@@ -78,19 +79,23 @@ def plot_new_cases_group_country(df):
     # Plot a horizontal line where the ratio of new daily cases is 1
     ax11.axhline(y=1, color='lightgrey', linestyle='-')
 
+    # Set axes labels and minimum values for x-axis 
     ax1.set_xlabel('Date')
     ax1.set_ylabel('Number of cases')
     ax11.set_ylabel('Ratio of new daily cases')
+    ax11.set_xlim([pd.to_datetime('2020-03-01'), df['Date'].max()])
 
     ax2.set_xlabel('Date')
     ax2.set_ylabel('Number of cases per million?')
     ax22.set_ylabel('Delta number of cases per million?')
+    ax22.set_xlim([pd.to_datetime('2020-03-01'), df['Date'].max()])
+
 
     plt.show()
 
 
 if __name__ == '__main__':
-    data_list = get_data.get_data_for_countries(['Spain', 'Italy'])
+    data_list = get_data.get_data_for_countries(['Spain', 'Italy', 'United Kingdom', 'China', 'Switzerland'])
 
     df = put_data_list_into_dataframe(data_list)
 
